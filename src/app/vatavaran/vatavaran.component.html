@@ -1,0 +1,119 @@
+<div class="container-fluid py-4">
+  <div class="container-fluid border">
+    <div class="row p-2">
+      <div class="col-md-4 p-2">
+        <div class="container-fluid m-0 g-0 border">
+          <div class="row p-2 m-0 g-0">
+            <mat-form-field appearance="outline">
+              <mat-label>TYPE CITY NAME</mat-label>
+              <input type="text" matInput [formControl]="cityNameControl" />
+              <button
+                mat-icon-button
+                matIconSuffix
+                class="me-1"
+                (click)="onSearch()"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+              @if (cityNameControl.hasError('required')) {
+              <mat-error>This field is required!</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="row p-2 m-0 g-0">
+            <div class="border-bottom">
+              <small class="text-muted">RECENT LOCATIONS</small>
+            </div>
+          </div>
+          <div class="container-fluid overflow-auto g-0" style="height: 50vh">
+            @for (record of cities$ | async; track $index) {
+            <div class="row p-2 m-0 g-0">
+              <div class="col">{{ record }}</div>
+              <div class="col-auto">
+                <mat-icon class="me-2" role="button" (click)="onSearch(record)"
+                  >autorenew</mat-icon
+                ><mat-icon role="button" (click)="deleteCity(record)"
+                  >close</mat-icon
+                >
+              </div>
+            </div>
+            }
+          </div>
+          <div class="row p-2 m-0 g-0">
+            <div class="col text-end">
+              <button
+                mat-flat-button
+                class="bg-info"
+                (click)="clearAllCities()"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md p-2">
+        <div class="container-fluid p-2 border h-100 m-0 g-0">
+          @if (weather$ | async; as weather) {
+          <ng-container>
+            <div class="row m-0 g-0">
+              <div class="col fw-bold ps-2 h5 m-0 align-self-center">
+                {{ weather.name }}
+              </div>
+              <div class="col-auto">
+                <mat-icon
+                  class="h4 m-0 h-auto w-auto d-flex"
+                  (click)="onSearch(weather.name)"
+                  >autorenew</mat-icon
+                >
+              </div>
+            </div>
+            <div class="row m-0 g-0 pt-2">
+              <div class="col-auto p-2 border">
+                <img
+                  [src]="getIcon(weather.weather[0].description)"
+                  height="200px"
+                  width="200px"
+                  alt="weathericon"
+                />
+              </div>
+              <div class="col p-2 d-flex flex-column justify-content-around">
+                <div class="p-2">
+                  {{ inCelcius(weather.main.temp) | number : "1.0-1" }}°C
+                </div>
+                <div class="p-2">{{ weather.weather[0].description }}</div>
+                <div class="p-2">
+                  Wind: {{ weather.wind.speed }}ms {{ weather.wind.deg }} deg
+                </div>
+                <div class="p-2">Pressure: {{ weather.main.pressure }}</div>
+              </div>
+            </div>
+            <div class="row m-0 g-0 mt-4">
+              @for (record of (dailyData$ | async)?.list; track $index) {
+              <div class="col-auto p-4">
+                <div class="text-center">{{ record.dt_txt | date : "dd" }}</div>
+                <div class="text-center">
+                  {{ record.dt_txt | date : "MMM" }}
+                </div>
+                <div class="text-center">
+                  <img
+                    [src]="getIcon(record.weather[0].description)"
+                    height="40px"
+                    width="40px"
+                    alt="weathericon"
+                  />
+                </div>
+                <div class="text-center">
+                  {{ inCelcius(record.main.temp) | number : "1.0-2" }}°C
+                </div>
+              </div>
+              }
+            </div>
+          </ng-container>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="weatherLoader$ | async"></app-loader>

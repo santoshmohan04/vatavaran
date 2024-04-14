@@ -1,0 +1,42 @@
+<div class="container-fluid bg-light p-4">
+  <div class="container">
+    <div class="row bg-warning p-2">
+      <div class="col d-flex gap-2 justify-content-center">
+        <button mat-flat-button color="warn" (click)="resetCounters()">
+          RESET
+        </button>
+        <button mat-flat-button color="primary" (click)="addCounter()">
+          ADD
+        </button>
+      </div>
+    </div>
+    @for (record of counters$ | async; track $index) {
+    <div class="row border rounded-2 bg-white my-2">
+      <div class="d-flex gap-2 flex-wrap p-2">
+        <div
+          class="bg-primary text-white px-4 rounded-pill d-flex align-items-center"
+        >
+          {{ record }}
+        </div>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="incrementCounter($index)"
+        >
+          Increment
+        </button>
+        <button
+          mat-flat-button
+          color="accent"
+          (click)="decrementCounter($index)"
+        >
+          Decrement
+        </button>
+        <button mat-flat-button color="warn" (click)="deleteCounter($index)">
+          Delete
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular_vatavaran:build:production"
+              "buildTarget": "angular_vatavaran:build:production"
             },
             "development": {
-              "browserTarget": "angular_vatavaran:build:development"
+              "buildTarget": "angular_vatavaran:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular_vatavaran:build"
+            "buildTarget": "angular_vatavaran:build"
           }
         },
         "test": {

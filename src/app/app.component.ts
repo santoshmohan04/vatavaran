@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { WeatherApiService } from './weatherapi.service';
 import { Title } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
@@ -20,14 +20,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   current: any = {};
   dailyWeather: any = [];
   errorMsg: string = '';
-  addCityForm: FormGroup;
+  addCityForm: UntypedFormGroup;
   private listSub = new BehaviorSubject([]);
   listSubObservab = this.listSub.asObservable();
 
   constructor(
     private getLocation: WeatherApiService,
     public title: Title,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     })
   }
 
-  onAdd(form: FormGroup) {
+  onAdd(form: UntypedFormGroup) {
     let enteredCity = form.value.city;
     this.getLocation.getGeoLoc(enteredCity).subscribe({
       next: (res: any) => {

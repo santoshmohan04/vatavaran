@@ -1,0 +1,33 @@
+<div class="container-fluid mat-elevation-z2 mb-2 bg-info">
+  <div class="container p-2">
+    <div class="row">
+      <div class="col text-center p-2">
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          routerLink="counter"
+          routerLinkActive="bg-primary"
+          class="text-nowrap"
+        >
+          <span class="h5 fw-bold m-0 text-center">Counter App</span>
+          <span class="ms-2 px-2 rounded-pill bg-white text-black">{{
+            (counters$ | async)?.length
+          }}</span>
+        </button>
+      </div>
+      <div class="col text-center p-2">
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          routerLink="vatavaran"
+          routerLinkActive="bg-primary"
+          class="text-nowrap"
+        >
+          <span class="h5 fw-bold m-0 text-center">Weather App</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

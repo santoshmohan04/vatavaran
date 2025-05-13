@@ -68,5 +68,5 @@ export const weatherReducer = createReducer(
     ...state,
     cities: state.cities.filter((city) => city != cityName),
   })),
-  on(clearAllCities, (state) => ({ ...state, cities: [] }))
+  on(clearAllCities, (state) => ({ ...state, cities: [], dailyData:null, data:null }))
 );

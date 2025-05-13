@@ -39,17 +39,19 @@
             </div>
             }
           </div>
-          <div class="row p-2 m-0 g-0">
-            <div class="col text-end">
-              <button
-                mat-flat-button
-                class="bg-info"
-                (click)="clearAllCities()"
-              >
-                Clear
-              </button>
+          @if((cities$ | async).length > 0){
+            <div class="row p-2 m-0 g-0">
+              <div class="col text-end">
+                <button
+                  mat-flat-button
+                  class="bg-info"
+                  (click)="clearAllCities()"
+                >
+                  Clear
+                </button>
+              </div>
             </div>
-          </div>
+          }
         </div>
       </div>
       <div class="col-md p-2">

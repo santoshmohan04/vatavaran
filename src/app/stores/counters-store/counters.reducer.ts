@@ -18,7 +18,7 @@ export const countersReducer = createReducer(
   }),
   on(decrementCounter, (state, { index }) => {
     let newState = [...state];
-    if (index > 0) {
+    if (newState[index] > 0) {
       newState[index] = newState[index] - 1;
     }
     return newState;

@@ -42,7 +42,7 @@ import { LoaderComponent } from '../loader/loader.component';
   styleUrl: './vatavaran.component.css',
 })
 export class VatavaranComponent implements OnInit, OnDestroy {
-  constructor(private _store: Store) {}
+  constructor(private _store: Store) { }
   cityNameControl: FormControl = new FormControl('', Validators.required);
 
   weather$: Observable<ICityWeather | null> = this._store
@@ -81,8 +81,10 @@ export class VatavaranComponent implements OnInit, OnDestroy {
   }
 
   inCelcius(value: number) {
-    let fahrenheit = 285;
-    let celsius = (fahrenheit - 32) * (5 / 9);
+    // let fahrenheit = 285;
+    // let celsius = (fahrenheit - 32) * (5 / 9);
+    let kelvin = value;
+    let celsius = kelvin - 273.15;
     return celsius;
   }
 
@@ -98,12 +100,12 @@ export class VatavaranComponent implements OnInit, OnDestroy {
     return description.toLowerCase()?.includes('clear')
       ? '/assets/icons/day.svg'
       : description.toLowerCase()?.includes('rain')
-      ? '/assets/icons/rainy-1.svg'
-      : description.toLowerCase()?.includes('cloud')
-      ? '/assets/icons/cloudy-day-1.svg'
-      : description.toLowerCase()?.includes('haze')
-      ? '/assets/icons/haze.png'
-      : '/assets/icons/snowy-1.svg';
+        ? '/assets/icons/rainy-1.svg'
+        : description.toLowerCase()?.includes('cloud')
+          ? '/assets/icons/cloudy-day-1.svg'
+          : description.toLowerCase()?.includes('haze')
+            ? '/assets/icons/haze.png'
+            : '/assets/icons/snowy-1.svg';
   }
 
   ngOnDestroy(): void {
